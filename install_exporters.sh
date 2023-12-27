@@ -2,9 +2,9 @@
 
 read -p "Enter bond_denom value, for example, ubld for Agoric: " BOND_DENOM
 read -p "Enter bench_prefix value, for example, agoric for Agoric: " BENCH_PREFIX
-read -p "Enter rpc_port value or hit Enter for default port [26657]: " RPC_PORT
+read -p "Enter rpc_port value or hit Enter for default port [http://localhost:26657]: " RPC_PORT
 RPC_PORT=${RPC_PORT:-26657}
-read -p "Enter grpc_port value or hit Enter for default port [9090]: " GRPC_PORT
+read -p "Enter grpc_port value or hit Enter for default port [localhost:9090]: " GRPC_PORT
 GRPC_PORT=${GRPC_PORT:-9090}
 
 echo '================================================='
@@ -35,7 +35,7 @@ Group=cosmos_exporter
 TimeoutStartSec=0
 CPUWeight=95
 IOWeight=95
-ExecStart=cosmos-exporter --denom ${BOND_DENOM} --denom-coefficient 1000000 --bech-prefix ${BENCH_PREFIX} --tendermint-rpc http://localhost:${RPC_PORT} --node localhost:${GRPC_PORT}
+ExecStart=cosmos-exporter --denom ${BOND_DENOM} --denom-coefficient 1000000 --bech-prefix ${BENCH_PREFIX} --tendermint-rpc ${RPC_PORT} --node ${GRPC_PORT}
 Restart=always
 RestartSec=2
 LimitNOFILE=800000
